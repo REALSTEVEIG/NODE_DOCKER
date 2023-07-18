@@ -27,7 +27,7 @@ const connectWithRetry = () => {
     console.log("Connected to mongoDB...")
 })
 .catch((error) => {
-    console.log("Cannot connect to the database...", error)
+    console.log("Cannot connect to the database... Error : ", error)
     setTimeout(connectWithRetry, 5000)
 })
  
