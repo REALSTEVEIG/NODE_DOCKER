@@ -21,8 +21,8 @@ redisClient.connect().then(() => {
 const app = express()
 
 const connectWithRetry = () => {
-    mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`)
-    // mongoose.connect(`mongodb://stephen:steve1234@172.23.0.2:27017/?authSource=admin`)
+    // mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`)
+    mongoose.connect(`mongodb://stephen:steve1234@172.23.0.2:27017/?authSource=admin`)
 .then(() => {
     console.log("Connected to mongoDB...")
 })
