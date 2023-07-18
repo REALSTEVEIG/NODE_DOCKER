@@ -2,12 +2,12 @@ version: "3"
 services:
   nginx:
     ports:
-      - "3000:80" # specify port mapping 
+      - "80:80" # specify port mapping 
   node-app:
     build:
       context: .
       args:
-        - NODE_ENV=production
+        - NODE_ENV: production
     environment:
       - NODE_ENV=production
       - MONGO_USER=${MONGO_USER}
