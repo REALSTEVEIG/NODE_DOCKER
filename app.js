@@ -21,17 +21,22 @@ redisClient.connect().then(() => {
 const app = express()
 
 const connectWithRetry = () => {
-    mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`)
-    // mongoose.connect(`mongodb://stephen:steve1234@172.23.0.2:27017/?authSource=admin`)
-.then(() => {
-    console.log("Connected to mongoDB...")
-})
-.catch((error) => {
-    console.log("Cannot connect to the database... Error : ", error)
-    setTimeout(connectWithRetry, 5000)
-})
- 
-}
+    const options = {
+      serverSelectionTimeoutMS: 60000, // 60 seconds
+    };
+  
+    mongoose.connect(
+      `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`,
+      options
+    )
+      .then(() => {
+        console.log("Connected to MongoDB...");
+      })
+      .catch((error) => {
+        console.log("Cannot connect to the database. Error:", error);
+        setTimeout(connectWithRetry, 5000);
+      });
+  };
 
 connectWithRetry()
 
