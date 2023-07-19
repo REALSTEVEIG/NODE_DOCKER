@@ -8,14 +8,9 @@ const redis = require("redis")
 const session = require("express-session")
 const RedisStore = require("connect-redis").default
 
-// let redisClient = redis.createClient({
-//     url: `redis://${REDIS_URL}:${REDIS_PORT}`
-// })
-
 let redisClient = redis.createClient({
-    host: "172.28.0.4",
-    port: REDIS_PORT
- })
+    url: `redis://${REDIS_URL}:${REDIS_PORT}`
+})
 
 redisClient.connect().then(() => {
     console.log("Connected to Redis...")
@@ -27,7 +22,7 @@ const app = express()
 
 const connectWithRetry = () => {
     // mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`)
-    mongoose.connect(`mongodb://stephen:steve1234@172.28.0.3:27017/?authSource=admin`)
+    mongoose.connect(`mongodb://stephen:steve1234@mongo:27017/?authSource=admin`)
 .then(() => {
     console.log("Connected to mongoDB...")
 })
