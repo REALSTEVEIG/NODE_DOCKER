@@ -8,32 +8,32 @@ const redis = require("redis")
 const session = require("express-session")
 const RedisStore = require("connect-redis").default
 
-// let redisClient = redis.createClient({
-//     url: `redis://${REDIS_URL}:${REDIS_PORT}`
-// })
+let redisClient = redis.createClient({
+    url: `redis://${REDIS_URL}:${REDIS_PORT}`
+})
 
-// redisClient.connect().then(() => {
-//     console.log("Connected to Redis...")
-// }).catch((error) => {
-//     console.log("Cannot connect to Redis...", error)
-// })
+redisClient.connect().then(() => {
+    console.log("Connected to Redis...")
+}).catch((error) => {
+    console.log("Cannot connect to Redis...", error)
+})
 
 const app = express()
 
-// const connectWithRetry = () => {
-//     // mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`)
-//     mongoose.connect(`mongodb://stephen:steve1234@mongo:27017/?authSource=admin`)
-// .then(() => {
-//     console.log("Connected to mongoDB...")
-// })
-// .catch((error) => {
-//     console.log("Cannot connect to the database... Error : ", error)
-//     setTimeout(connectWithRetry, 5000)
-// })
+const connectWithRetry = () => {
+    // mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`)
+    mongoose.connect(`mongodb://stephen:steve1234@mongo:27017/?authSource=admin`)
+.then(() => {
+    console.log("Connected to mongoDB...")
+})
+.catch((error) => {
+    console.log("Cannot connect to the database... Error : ", error)
+    setTimeout(connectWithRetry, 5000)
+})
  
-// }
+}
 
-// connectWithRetry()
+connectWithRetry()
 
 app.enable("trust proxy") // trust the headers from nginx
 
