@@ -20,12 +20,14 @@ redisClient.connect().then(() => {
 
 const app = express()
 
+// mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`)
+
 const connectWithRetry = () => {
     mongoose
       .connect(`mongodb://stephen:steve1234@mongo:27017/?authSource=admin`, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        serverSelectionTimeoutMS: 3000, // Adjust this timeout as needed
+        serverSelectionTimeoutMS: 20000, // Increase the timeout to 20 seconds
       })
       .then(() => {
         console.log("Connected to mongoDB...");
