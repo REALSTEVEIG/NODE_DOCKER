@@ -75,7 +75,7 @@ app.use("/api/v1/home", (req, res) => {
     try {
         console.log("nginx test")
         res.send({ 
-            message: "Welcome to the home page.."
+            message: "Welcome to the home page!"
         })
     } catch (error) {
         return res.status(500).json({
