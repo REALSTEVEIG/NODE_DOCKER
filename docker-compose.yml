@@ -8,6 +8,7 @@ services:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf # mount nginx config
   node-app:
     build: . # use the Dockerfile in the current directory
+    image: realsteveig/node-app # specify image name
     environment:
       - PORT=3000 # container
     depends_on: # container dependencies
