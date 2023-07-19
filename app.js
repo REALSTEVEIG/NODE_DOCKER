@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 const express = require("express")
 const cors = require("cors")
 const mongoose = require("mongoose")
@@ -7,6 +9,7 @@ const userRouter = require("./routes/userRoute")
 const redis = require("redis")
 const session = require("express-session")
 const RedisStore = require("connect-redis").default
+
 
 let redisClient = redis.createClient({
     url: `redis://${REDIS_URL}:${REDIS_PORT}`
@@ -21,8 +24,8 @@ redisClient.connect().then(() => {
 const app = express()
 
 const connectWithRetry = () => {
-    // mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`)
-    mongoose.connect(`mongodb://stephen:steve1234@mongo:27017/?authSource=admin`)
+    mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`)
+    // mongoose.connect(`mongodb://stephen:steve1234@mongo:27017/?authSource=admin`)
 .then(() => {
     console.log("Connected to mongoDB...")
 })
@@ -75,7 +78,7 @@ app.use("/api/v1/home", (req, res) => {
     try {
         console.log("nginx test")
         res.send({ 
-            message: "Welcome to the home page!"
+            message: "Welcome to the home page. This is a test for nginx!"
         })
     } catch (error) {
         return res.status(500).json({
